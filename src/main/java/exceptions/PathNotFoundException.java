@@ -1,8 +1,8 @@
 package exceptions;
 
-public class PathNotException extends RuntimeException{
+public class PathNotFoundException extends RuntimeException{
 
-    public PathNotException(){
+    public PathNotFoundException(){
         super("Path annotation not found on page class");
     }
 }
