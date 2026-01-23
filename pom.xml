@@ -5,45 +5,49 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>PracticaOtusAutoTest2</artifactId>
+    <artifactId>AutotestWithExpectations1</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <selenium.verssion>4.36.0</selenium.verssion>
-        <jupiter.version>6.0.0</jupiter.version>
-        <webdriver.version>6.3.2</webdriver.version>
-        <guice.version>7.0.0</guice.version>
-        <guava.version>33.5.0-jre</guava.version>
-        <checkstyleplagin.version>3.6.0</checkstyleplagin.version>
-        <checkstyle.version>12.3.1</checkstyle.version>
-        <commonstext.version>1.15.0</commonstext.version>
-        <assertj.version>3.27.6</assertj.version>
-
         <target.version>24</target.version>
         <source.version>24</source.version>
-
-        <compiler.version>3.14.1</compiler.version>
+        <compiler.version>3.14.0</compiler.version>
         <surefire.version>3.5.4</surefire.version>
 
+        <selenium.version>4.38.0</selenium.version>
+        <webdrivermanager.version>6.3.2</webdrivermanager.version>
+        <guice.version>6.0.0</guice.version>
+        <junit.version>5.13.4</junit.version>
+        <assertj.version>3.27.6</assertj.version>
+        <log4j.version>2.24.3</log4j.version>
+        <jsoup.version>1.21.1</jsoup.version>
+        <guava.version>33.5.0-jre</guava.version>
+
+
         <base.url/>
-        <browser.name>chrome</browser.name>
+        <browser.type>chrome</browser.type>
     </properties>
 
     <dependencies>
         <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.logging.log4j</groupId>-->
+        <!--            <artifactId>log4j-core</artifactId>-->
+        <!--            <version>${log4j.version}</version>-->
+        <!--        </dependency>-->
+        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${selenium.verssion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${jupiter.version}</version>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>${webdriver.version}</version>
+            <version>${webdrivermanager.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -56,35 +60,27 @@
             <version>${guava.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>${checkstyle.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-text</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>${commonstext.version}</version>
-        </dependency>
+
     </dependencies>
+
     <profiles>
         <profile>
             <id>prod</id>
             <properties>
-                <base.url>https://auto.mail.ru</base.url>
+                <base.url>https://otus.ru</base.url>
             </properties>
         </profile>
     </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -103,30 +99,11 @@
                 <configuration>
                     <systemPropertyVariables>
                         <base.url>${base.url}</base.url>
-                        <browser.name>${browser.name}</browser.name>
+                        <browser.type>${browser.type}</browser.type>
                     </systemPropertyVariables>
-                    <includes>
-                        <include>**/*MainPageTest.java</include>
-                    </includes>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyleplagin.version}</version>
-                <configuration>
-                    <configLocation>google_checks.xml</configLocation>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
+
 </project>

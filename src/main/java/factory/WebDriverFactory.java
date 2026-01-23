@@ -15,8 +15,10 @@ public class WebDriverFactory {
             .toLowerCase(Locale.ROOT);
 
     public WebDriver create() {
+
         if ("chrome".equals(browser)) {
             WebDriverManager.chromedriver().setup();
+
             return new
                     ChromeDriver((ChromeOptions) new ChromeSettings().settings());
         }
@@ -24,8 +26,10 @@ public class WebDriverFactory {
     }
 
     public void init() {
+
         if ("chrome".equals(browser)) {
             WebDriverManager.chromedriver().setup();
+
         } else {
             throw new BrowserNotSupportException(browser);
         }

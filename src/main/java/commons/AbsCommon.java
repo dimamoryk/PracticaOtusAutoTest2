@@ -31,10 +31,12 @@ public abstract class AbsCommon {
         Guice.createInjector(new PagesModule(driver)).injectMembers(this);
 
     }
-public BiConsumer<List<WebElement>, Predicate<WebElement>> clickElementByPredicate =
-        (List<WebElement> elements, Predicate<WebElement> elementPredicate) ->
-                elements.stream().filter(elementPredicate).findFirst().get().click();
-
+    public BiConsumer<List<WebElement>, Predicate<WebElement>> clickElementByPredicate =
+            (elements, elementPredicate) ->
+                    elements.stream()
+                            .filter(elementPredicate)
+                            .findFirst()
+                            .ifPresent(WebElement::click); // Безопаснее!
 public WebElement $(By selector){
     return driver.findElement(selector);
 }
